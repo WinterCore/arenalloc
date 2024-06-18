@@ -12,7 +12,7 @@ release: CFLAGS += -DNDEBUG
 SRC_C=$(shell find . -name "*.c")
 SRC_ALL=$(shell find . -name "*.c" -o -name '*.h')
 
-Arenalloc: $(SRC)
+Arenalloc: $(SRC_ALL)
 	cc $(CFLAGS) -o Arenalloc $(SRC_C) $(LDFLAGS)
 
 all: Arenalloc
