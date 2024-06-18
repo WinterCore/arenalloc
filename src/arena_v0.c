@@ -26,7 +26,7 @@ static ArenaV0* _arena_create(size_t size) {
 }
 
 ArenaV0 *arena_create() {
-    return _arena_create(PAGE_SIZE);
+    return _arena_create(ARENA_PAGE_SIZE);
 }
 
 void *arena_alloc(ArenaV0 *arena, size_t size) {
@@ -39,7 +39,7 @@ void *arena_alloc(ArenaV0 *arena, size_t size) {
         arena = arena->next_arena;
     } while (arena->next_arena != NULL);
 
-    size_t new_arena_size = size > PAGE_SIZE ? size : PAGE_SIZE;
+    size_t new_arena_size = size > ARENA_PAGE_SIZE ? size : ARENA_PAGE_SIZE;
 
     ArenaV0 *new_arena = _arena_create(new_arena_size);
     new_arena->size = size;
