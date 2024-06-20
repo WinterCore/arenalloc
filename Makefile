@@ -30,4 +30,4 @@ Arenalloc: $(SRC_ALL)
 all: Arenalloc
 
 clean:
-	rm -rf Arenalloc ./src/*.o ./src/**/*.o
+	rm -rf Arenalloc ./src/*.o ./src/**/*.o ./src/**/*test ./*.dSYM
