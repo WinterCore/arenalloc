@@ -41,7 +41,7 @@ void test_alloc2() {
     uint8_t *ptr3 = arena_alloc(arena, sizeof(uint8_t) * 300);
 
     assert(ptr1 == &arena->data[0] && "small pointer should point to first region");
-    assert(ptr2 == &arena->next_arena->data[0] && "big pointer should point to second region");
+    assert(ptr2 == &arena->next->data[0] && "big pointer should point to second region");
     assert(ptr3 == &arena->data[200] && "2nd small pointer should point to first region");
 }
 

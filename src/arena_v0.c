@@ -17,7 +17,7 @@ static ArenaV0* _arena_create(size_t size) {
         exit(EXIT_FAILURE);
     }
 
-    arena->next_arena = NULL;
+    arena->next = NULL;
     arena->current = 0;
     arena->data = data;
     arena->size = size;
@@ -37,10 +37,10 @@ void *arena_alloc(ArenaV0 *arena, size_t size) {
             return ptr;
         }
 
-        if (arena->next_arena != NULL) {
-            arena = arena->next_arena;
+        if (arena->next != NULL) {
+            arena = arena->next;
         }
-    } while (arena->next_arena != NULL);
+    } while (arena->next != NULL);
 
     size_t new_arena_size = size > ARENA_PAGE_SIZE ? size : ARENA_PAGE_SIZE;
 
@@ -48,14 +48,14 @@ void *arena_alloc(ArenaV0 *arena, size_t size) {
     new_arena->size = size;
     new_arena->current = size;
 
-    arena->next_arena = new_arena;
+    arena->next = new_arena;
 
     return new_arena->data;
 }
 
 void arena_destroy(ArenaV0 *arena) {
     while (arena) {
-        ArenaV0 *tmp_next = arena->next_arena;
+        ArenaV0 *tmp_next = arena->next;
 
         free(arena->data);
         free(arena);
@@ -64,5 +64,10 @@ void arena_destroy(ArenaV0 *arena) {
     }
 }
 
-// TODO: Implement arena_reset
+void arena_reset(ArenaV0 *arena) {
+    while (arena) {
+        arena->current = 0;
+        arena = arena->next;
+    }
+}
 
