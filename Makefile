@@ -22,6 +22,7 @@ test: $(basename $(SRC_TEST))
 	@for t in $(basename $(SRC_TEST)); do \
 		$$t; \
 	done
+	@echo "Tests ran successfully"
 
 
 Arenalloc: $(SRC_ALL)
