@@ -17,6 +17,7 @@ ArenaV0 *arena_create();
 
 void *arena_alloc(ArenaV0 *arena, size_t size);
 void arena_reset(ArenaV0 *arena);
+void arena_reset(ArenaV0 *arena);
 void arena_destroy(ArenaV0 *arena);
 
 #endif
